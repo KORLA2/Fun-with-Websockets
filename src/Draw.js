@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react';
 
 const Draw = ({size}) => {
-  var can,ctx,x=0,y=0,prevx=0,prevy=0;
+let  can,ctx,x=0,y=0,prevx=0,prevy=0;
     console.log(size)
     useEffect(()=>{
 
@@ -11,16 +11,18 @@ const Draw = ({size}) => {
       console.log(ctx)
       can.height = 300;
       can.width = size;
-},[])
+
+},[x,y])
 
 
   return (
 <canvas id='can'    onMouseMove={(e)=>{
+
 prevx=x;
 prevy=y;
 x=e.clientX;
 y=e.clientY;
-if(ctx){
+
 
 ctx.moveTo(prevx,prevy)
 ctx.lineTo(x,y);
@@ -28,7 +30,7 @@ ctx.stroke();
 ctx.strokeStyle='black'
 ctx.lineWidth=2;
 
-}
+
 }}  style={{height:'300px'}}>
 
 
