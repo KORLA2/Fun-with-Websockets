@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React ,{useState,useEffect}from "react";
+import React ,{useState,useEffect,useRef}from "react";
 import Draw from '../Draw.js'
 import Send from '@material-ui/icons/Send'
 import {TextField,Grid,Paper,makeStyles,IconButton} from '@material-ui/core'
@@ -48,30 +48,34 @@ let [dimensions,setdimensions]=useState({height:100,width:100,});
 
   },[ENDPORT,location])
 
-let [size,setsize]=useState(0);
+
+let ref=useRef(null);
+
+useEffect(()=>{
+  setdimensions({
+    height: ref.current.clientHeight,
+    width: ref.current.clientWidth,
+  });
+
+
+},[])
+window.addEventListener('resize',()=>{
+
+  setdimensions({height:ref.current.clientHeight,width:ref.current.clientWidth});
+})
+
 let clas=useStyle();
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         <Grid item xs={12} sm={3}>
           <Paper className={classes.paper}>People</Paper>
         </Grid>
-        <Grid
-            onMouseMove={(e) => {
-            setpos({ x: e.clientX, y: e.clientY });
-          }}
-          item
-          xs={12}
-          sm={6}
-          
-        >
-          <Paper 
-          
-      className={clas.pap}>
-            <Draw 
-          
-            dimensions={dimensions} pos={pos} />
+
+        <Grid item xs={12} sm={6} style={{ position: "relative" }}>
+          <Paper ref={ref} className={clas.pap}>
+            <Draw dimensions={dimensions} />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={3}>
@@ -95,7 +99,6 @@ let clas=useStyle();
               }}
             >
               <TextField
-              
                 // label="Multiline Placeholder"
                 placeholder="Message"
                 multiline
