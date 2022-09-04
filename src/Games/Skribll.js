@@ -4,7 +4,7 @@ import Draw from '../Draw.js'
 import Send from '@material-ui/icons/Send'
 import {TextField,Grid,Paper,makeStyles,IconButton} from '@material-ui/core'
 import { useLocation } from 'react-router-dom'; 
-// import { location } from 'react-router-dom';
+
 import queryString  from 'query-string'
 import io from 'socket.io-client'
 const useStyles = makeStyles((theme) => ({
