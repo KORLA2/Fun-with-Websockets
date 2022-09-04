@@ -23,7 +23,7 @@ let useStyle=makeStyles((theme)=>(
 
 pap:{
     padding: theme.spacing(2),
-    height:'300px',
+    height:'300px'
 }
 }
 ))
