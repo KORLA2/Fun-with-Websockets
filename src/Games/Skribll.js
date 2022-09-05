@@ -27,15 +27,17 @@ pap:{
 }
 }
 ))
-
+let socket;
 export default function FullWidthGrid({ Location }) {
 let [name,setname]=useState('solo')
 let [room,setroom]=useState('kholo');
+let [message ,setmessage] = useState("");
+let [display,setdisplay]=useState(0);
 let [pos,setpos]=useState({x:0,y:0});
 let [dimensions,setdimensions]=useState({height:100,width:100,});
   let location=useLocation();
 
-  let  ENDPORT='http://localhost'
+  let  ENDPORT='http://localhost:5000'
   
   let params=new URLSearchParams(location.search);
   useEffect(()=>{
@@ -43,11 +45,20 @@ let [dimensions,setdimensions]=useState({height:100,width:100,});
     setname(params.get('name'));
     setroom(params.get("room"));
 
-    // let socket=io(ENDPORT,{ reconnection:true,transports:['polling','websocket'],forceNew:true})
-  // socket.emit('join',{name,room})
+   
+   let  socket = io(ENDPORT,{transports:['websocket','polling']})
+console.log(socket)
 
-  },[ENDPORT,location])
+socket.on('connect',()=>{
+  
+  console.log(socket.id)
+  
+  socket.emit('join',{name,room})
+})
+socket.on('received',(anme)=>console.log(anme))
 
+
+},[ENDPORT,location.search,name,room])
 
 let ref=useRef(null);
 
@@ -99,15 +110,22 @@ let clas=useStyle();
               }}
             >
               <TextField
+              id='input'
                 // label="Multiline Placeholder"
                 placeholder="Message"
                 multiline
+                onChange={(e)=>setmessage(e.target.value)}
               />
               <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-                <Send />
+                <Send  onClick={()=>{  
+document.getElementById('input').value=''
+setdisplay(1)
+                }}/>
               </IconButton>
             </Paper>
-            Chat
+       {
+        
+     }
           </Paper>
         </Grid>
         <Grid item xs={12}>

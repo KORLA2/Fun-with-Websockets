@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap-grid.min.css";
 import App from './Components/App'
 const Draw = ({dimensions}) => {
 
-console.log(dimensions)
   
   return (
 

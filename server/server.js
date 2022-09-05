@@ -1,33 +1,31 @@
 let app=require('express')();
-let {router,cors}=require('./Router');
+let {router}=require('./Router');
 let http=require('http')
 
-
-app.use(cors({
-
-    origin:'*'
-}))
-
 let server=http.createServer(app)
-
 let io=require('socket.io')(server)
+
+io.on('connection',(socket)=>{
+socket.on('join',({name,room})=>{
+
+console.log(name,room)
+io.emit('received',"MessageReceived")
+
+
+})
+console.log(socket.id+'cconnected')
+socket.on('disconnect',()=>{
+    console.log('connection disconnected')
+})
+})
+
+
 
 let port=process.env.PORT||5000
 
-io.on('connection',(socket)=>{
-console.log('New Player added')
+console.log('app crashed..')
 
-socket.on('join',({name,room})=>{
 
-    console.log(name,room)
-})
-
-socket.on('disconnect',()=>{
-    console.log('Player Disconnected')
-
-})
-
-})
 app.use(router);
 
 server.listen(port,()=>{console.log(port)})
