@@ -54,10 +54,6 @@ let [dimensions,setdimensions]=useState({height:100,width:100,});
   socket.emit('join',{name,room},()=>{})
 
 
-// return ()=>{
-// socket.emit('disconnect')
-// socket.off()
-// }
 return ()=>{}
 
 },[ENDPORT,location.search,name,room])
