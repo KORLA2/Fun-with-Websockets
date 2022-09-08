@@ -51,7 +51,7 @@ let [dimensions,setdimensions]=useState({height:100,width:100,});
   socket = io(ENDPORT,{transports:['websocket','polling']})
    
 
-  socket.emit('join',{name,room},()=>{})
+  socket.emit('join',{name,room},()=>{console.log('hello');})
 
 
 return ()=>{}

@@ -20,6 +20,7 @@ io.on("connection", (socket) => {
     console.log(message);
     io.to(user.room).emit("message", { user: user.name, text: message });
     callback();
+    
 
   });
 
