@@ -32,8 +32,10 @@ export default function FullWidthGrid({ Location }) {
 let [name,setname]=useState('solo')
 let [room,setroom]=useState('kholo');
 let [message ,setmessage] = useState("");
+let [messages,setmessages]=useState('')
 let [display,setdisplay]=useState(0);
 let [pos,setpos]=useState({x:0,y:0});
+
 let [dimensions,setdimensions]=useState({height:100,width:100,});
   let location=useLocation();
 
@@ -46,19 +48,28 @@ let [dimensions,setdimensions]=useState({height:100,width:100,});
     setroom(params.get("room"));
 
    
-   let  socket = io(ENDPORT,{transports:['websocket','polling']})
-console.log(socket)
+  socket = io(ENDPORT,{transports:['websocket','polling']})
+   
 
-socket.on('connect',()=>{
-  
-  console.log(socket.id)
-  
-  socket.emit('join',{name,room})
-})
-socket.on('received',(anme)=>console.log(anme))
+  socket.emit('join',{name,room},()=>{})
 
+
+// return ()=>{
+// socket.emit('disconnect')
+// socket.off()
+// }
+return ()=>{}
 
 },[ENDPORT,location.search,name,room])
+
+
+
+useEffect(()=>{
+socket.on('message',(message)=>{
+setmessages([...messages,message]);
+})
+
+},[messages])
 
 let ref=useRef(null);
 
@@ -74,6 +85,7 @@ window.addEventListener('resize',()=>{
 
   setdimensions({height:ref.current.clientHeight,width:ref.current.clientWidth});
 })
+console.log(messages);
 
 let clas=useStyle();
   const classes = useStyles();
@@ -84,8 +96,8 @@ let clas=useStyle();
           <Paper className={classes.paper}>People</Paper>
         </Grid>
 
-        <Grid item xs={12} sm={6} style={{ position: "relative" }}>
-          <Paper ref={ref} className={clas.pap}>
+        <Grid item xs={12} sm={6} ref={ref}  style={{ position: "relative" }}>
+          <Paper className={clas.pap}>
             <Draw dimensions={dimensions} />
           </Paper>
         </Grid>
@@ -110,22 +122,26 @@ let clas=useStyle();
               }}
             >
               <TextField
-              id='input'
+                id="input"
                 // label="Multiline Placeholder"
+                value={message}
                 placeholder="Message"
                 multiline
-                onChange={(e)=>setmessage(e.target.value)}
+                onChange={(e) => setmessage(e.target.value)}
               />
               <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-                <Send  onClick={()=>{  
-document.getElementById('input').value=''
-setdisplay(1)
-                }}/>
+                <Send
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (message) {
+                      console.log(message);
+                      socket.emit("sendMessage", message, () => setmessage(""));
+                    }
+                  }}
+                />
               </IconButton>
             </Paper>
-       {
-        
-     }
+            {messages}
           </Paper>
         </Grid>
         <Grid item xs={12}>
