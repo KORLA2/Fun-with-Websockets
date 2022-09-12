@@ -1,62 +1,88 @@
-import React from 'react'
+import React,{useState} from 'react'
 import  styled ,{keyframes}from 'styled-components'
 import { Button } from '@material-ui/core'
-import Power from '@material-ui/icons/PowerSettingsNew'
+import Powers from './Power'
 import Social  from './Social'
 import FullLoad from "@material-ui/icons/SportsBaseball";
 import {Link }from 'react-router-dom'
+import Intro from './Intro';
+import {motion } from 'framer-motion'
 const Main = () => {
+  let [Click,setClick]=useState(0);
   return (
-    <Container>
+    <Container click={Click}>
       <Head>
         <h3>Korla Goutham</h3>
-        <Button
-          style={{
-            position: "fixed",
-            left: "50%",
-            transform: "translate(-50%,0)",
-          }}
-        >
-          <Power />
-        </Button>
-
+      
+  <Powers/>
         <Link
           target="_blank"
           style={{
             position: "fixed",
             right: "2rem",
+            zIndex: "2",
             textDecoration: "none",
           }}
           to={{ pathname: "mailto:gouthamkorla1023@gmail.com" }}
         >
-          <Button>Contact Me</Button>
+          <motion.div whileHover={{ scale:1.1 }}
+           whileTap={{ scale: .9 }}>
+            <Button className="ball">Contact Me</Button>
+          </motion.div>
         </Link>
 
         <Work to="/MyWork">
+         <motion.div whileHover={{ scale:1.1 }}
+           whileTap={{ scale: .9 }}>
+
           <Button>My Work</Button>
+           </motion.div>
         </Work>
+        
         <Blogs to="/MyBlogs">
-          <Button>My Blogs</Button>
+         <motion.div whileHover={{ scale:1.1 }}
+           whileTap={{ scale: .9 }}>
+
+          <Button className="ball">My Blogs</Button>
+           </motion.div>
         </Blogs>
       </Head>
       <div style={{ position: "absolute", bottom: ".5rem", zIndex: "3" }}>
         <Social />
         <Line />
       </div>
-
-      <Middle>
-        <FullLoad style={{transform:'scale(5)', animation :`${rotate},infinite,1.5s,linear`}}/>
-        Click ME
+      <Move click={Click} />
+      <Middle click={Click}>
+        {/* <Link> */}
+        <FullLoad
+          onClick={() => {
+            setClick(!Click);
+          }}
+          className="ball"
+          style={{ transform: "scale(5)", cursor: "pointer", border: "none" }}
+        />
+        {!Click ? <h3>Click on the ball</h3> : null}
+        {/* </Link> */}
       </Middle>
       <Bottom>
         <About to="/AboutMe">
+         <motion.div whileHover={{ scale:1.1 }}
+           whileTap={{ scale: .9 }}>
+
           <Button>About Me</Button>
+           </motion.div>
         </About>
 
         <Skills to="/MySkills">
-          <Button>MySkills</Button>
+         <motion.div whileHover={{ scale:1.1 }}
+           whileTap={{ scale: .9 }}>
+
+          <Button className="ball">MySkills</Button>
+           </motion.div>
         </Skills>
       </Bottom>
+ 
+      {!Click ? null : <Intro />}
     </Container>
   );
 }
@@ -65,26 +91,46 @@ export default Main
 
 
 let rotate = keyframes`
+
 0%{
-transform:rotate(360deg);
+transform:rotate(-360deg)  scale(5);
+}
+
+50%{
+transform:rotate(0deg) scale(.5);
 
 }
 100%{
-transform:rotate(0deg);
+transform:rotate(360deg) scale(5);
+
 
 }
+
 `;
-
-let Container=styled.div`
-
-
-    background: ${props => props.theme.body};
-
-color:${props => props.theme.text};
-height:100vh;
-width:100vw;
-padding:.5rem;;
-overflow:hidden;
+let Move = styled.div`
+  position: absolute;
+  /* z-index:; */
+  width: ${(props) => (props.click ? "50%" : "0%")};
+  height: 100%;
+  left: 60%;
+  top: 0%;
+  transition: height .5s ease-in, width 1.5s ease-out;
+  bottom: 0%;
+  background: ${props=>props.theme.text}
+`
+let Container = styled.div`
+  background: ${(props) => props.theme.body};
+  .ball {
+    transition: all 2s linear;
+    border: ${(props) => (props.click ? "2px solid white" : "none")};
+    /* padding: 0.2rem; */
+    color: ${(props) => (props.click ? "white" : "black")};
+  }
+  color: ${(props) => props.theme.text};
+  height: 100vh;
+  width: 100vw;
+  padding: 0.5rem;
+  overflow: hidden;
 `
 let Head = styled.div`
   /* position:relative; */
@@ -114,16 +160,24 @@ let Skills=styled(Link)`
 let About=styled(Link)`
 
 `
-let Middle=styled.div`
-position:absolute;
-top:50%;
+let Middle = styled.div`
+  position: absolute;
 display:flex;
-justify-content: center;
-align-items:center;
 flex-direction:column;
-left:50%;
-transform:translate(-50%,-50%);
-`
+  .ball {
+    animation: ${rotate} infinite 2s linear;
+  }
+
+  top: ${(props) => (props.click ? "90%" : "50%")};
+  justify-content: center;
+  /* border:2px solid red; */
+  transition: all 2s linear;
+  align-items: center;
+  flex-direction: column;
+
+  left: ${(props) => (props.click ? "90%" : "50%")};
+  transform: translate(-50%, -50%);
+`;
 let Bottom = styled.div`
   a {
     text-decoration: none;
@@ -152,7 +206,7 @@ transform:rotate(-90deg);
 let Blogs = styled(Link)`
   position: absolute;
   top: 30%;
- 
+ z-index:2;
   right: 0px;
   text-decoration: none;
   transform: rotate(90deg);

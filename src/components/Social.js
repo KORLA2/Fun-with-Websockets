@@ -6,6 +6,7 @@ import Code from "@material-ui/icons/CodeRounded";
 import { Button } from '@material-ui/core';
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
+
 const Social = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -17,13 +18,13 @@ const Social = () => {
      </Button>
      </Link>
 
-     <Link  target="_blank" to={{pathname:"https://linkedin.com/in/korla-goutham-4007701a4"}}>
+     <Link  target="_blank" to={{ pathname:"https://linkedin.com/in/korla-goutham-4007701a4"}}>
 
        <Button>
       <Linkedin style={{ margin: "2px", cursor: "pointer" }} />
         </Button>
      </Link>
-     <Link  target="_blank" to={{pathname:"https://korla.hashnode.dev"}}>
+     <Link  target="_blank" to={{ pathname:"https://korla.hashnode.dev"}}>
         
         <Button>
 
