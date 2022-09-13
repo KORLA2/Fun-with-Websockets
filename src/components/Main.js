@@ -14,6 +14,7 @@ const Main = () => {
       <Head>
         <h3>Korla Goutham</h3>
       
+      
   <Powers/>
         <Link
           target="_blank"
