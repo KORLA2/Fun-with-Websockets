@@ -3,7 +3,9 @@ import styled from 'styled-components'
 import Photo from './Me.jpeg'
 import {motion} from 'framer-motion'
 const Intro = () => {
+
   return (
+  
    <OuterBox
    initial={{height:0}}
 animate={{height: '55vh'}}
@@ -28,7 +30,7 @@ Iam a competetive Programmer and a Frontend Developer
 <InnerBox> 
 <motion.div initial={{opacity:0}}
 animate={{opacity:1 }}
-transition={{  duration :1,delay:.2,}}
+transition={{  duration :1,delay:1.2,}}
 >
 
 
