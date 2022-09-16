@@ -12,10 +12,16 @@ const Main = () => {
   return (
     <Container click={Click}>
       <Head>
-        <h3>Korla Goutham</h3>
-      
-      
-  <Powers/>
+        <motion.h3
+          initial={{ y: -200 }}
+          animate={{ y: 0, transition: { type: "spring", duration: 1 } }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          Korla Goutham
+        </motion.h3>
+
+        <Powers />
         <Link
           target="_blank"
           style={{
@@ -26,63 +32,98 @@ const Main = () => {
           }}
           to={{ pathname: "mailto:gouthamkorla1023@gmail.com" }}
         >
-          <motion.div whileHover={{ scale:1.1 }}
-           whileTap={{ scale: .9 }}>
+          <motion.div
+            initial={{ y: -200 }}
+            animate={{ y: 0, transition: { type: "spring", duration: 1.3 } }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
             <Button className="ball">Contact Me</Button>
           </motion.div>
         </Link>
 
         <Work to="/MyWork">
-         <motion.div whileHover={{ scale:1.1 }}
-           whileTap={{ scale: .9 }}>
-
-          <Button>My Work</Button>
-           </motion.div>
+          <motion.div
+            initial={{ y: -200 }}
+            animate={{ y: 0, transition: { type: "spring", duration: 1.3 } }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <Button>My Work</Button>
+          </motion.div>
         </Work>
-        
-        <Blogs to="/MyBlogs">
-         <motion.div whileHover={{ scale:1.1 }}
-           whileTap={{ scale: .9 }}>
 
-          <Button className="ball">My Blogs</Button>
-           </motion.div>
+        <Blogs to={{ pathname: "/MyBlogs" }}>
+          <motion.div
+            initial={{ y: -200 }}
+            animate={{ y: 0, transition: { type: "spring", duration: 1.3 } }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <Button className="ball">My Blogs</Button>
+          </motion.div>
         </Blogs>
       </Head>
       <div style={{ position: "absolute", bottom: ".5rem", zIndex: "3" }}>
         <Social />
-        <Line />
+        <Line
+          initial={{ height: "0rem" }}
+          animate={{
+            height: "8rem",
+            transition: { type: "tween", duration: 1.3 },
+          }}
+        />
       </div>
       <Move click={Click} />
       <Middle click={Click}>
         {/* <Link> */}
-        <FullLoad
-          onClick={() => {
-            setClick(!Click);
-          }}
-          className="ball"
-          style={{ transform: "scale(5)", cursor: "pointer", border: "none" }}
-        />
-        {!Click ? <h3>Click on the ball</h3> : null}
+        <motion.div
+          initial={{ y: -200 }}
+          animate={{ y: 0, transition: { type: "spring", duration: 1.3 } }}
+        >
+          <FullLoad
+            onClick={() => {
+              setClick(!Click);
+            }}
+            className="ball"
+            style={{ transform: "scale(5)", cursor: "pointer", border: "none" }}
+          />
+        </motion.div>
+        {!Click ? (
+          <motion.h3
+            initial={{ y: 200 }}
+            animate={{ y: 0, transition: { type: "spring", duration: 1.3 } }}
+          >
+            Click on the ball
+          </motion.h3>
+        ) : null}
+
         {/* </Link> */}
       </Middle>
       <Bottom>
         <About to="/AboutMe">
-         <motion.div whileHover={{ scale:1.1 }}
-           whileTap={{ scale: .9 }}>
-
-          <Button>About Me</Button>
-           </motion.div>
+          <motion.div
+            initial={{ y: 200 }}
+            animate={{ y: 0, transition: { type: "spring", duration: 1.3 } }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <Button>About Me</Button>
+          </motion.div>
         </About>
 
         <Skills to="/MySkills">
-         <motion.div whileHover={{ scale:1.1 }}
-           whileTap={{ scale: .9 }}>
-
-          <Button className="ball">MySkills</Button>
-           </motion.div>
+          <motion.div
+            initial={{ y: 200 }}
+            animate={{ y: 0, transition: { type: "spring", duration: 1.3 } }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <Button className="ball">MySkills</Button>
+          </motion.div>
         </Skills>
       </Bottom>
- 
+
       {!Click ? null : <Intro />}
     </Container>
   );
@@ -110,7 +151,7 @@ transform:rotate(360deg) scale(5);
 `;
 let Move = styled.div`
   position: absolute;
-  /* z-index:; */
+
   width: ${(props) => (props.click ? "50%" : "0%")};
   height: 100%;
   left: 60%;
@@ -120,7 +161,8 @@ let Move = styled.div`
   background: ${props=>props.theme.text}
 `
 let Container = styled.div`
-  background: ${(props) => props.theme.body};
+overflow:hidden;
+  background: radial-gradient(circle farthest-side, #fa97a4, #c02c3f);
   .ball {
     transition: all 2s linear;
     border: ${(props) => (props.click ? "2px solid white" : "none")};
@@ -131,8 +173,10 @@ let Container = styled.div`
   height: 100vh;
   width: 100vw;
   padding: 0.5rem;
+  transition: all 2s linear;
+
   overflow: hidden;
-`
+`;
 let Head = styled.div`
   /* position:relative; */
   button {
@@ -148,7 +192,7 @@ let Head = styled.div`
   align-items: center;
   justify-content: center;
 `;
-let Line = styled.div`
+let Line = styled(motion.div)`
   width: 2px;
   height: 8rem;
 margin-left:2rem;

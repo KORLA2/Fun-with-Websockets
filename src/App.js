@@ -12,10 +12,7 @@ const App = () => {
     <div>
       <ThemeProvider theme={light}>
         <Router>
-
-        
           <Switch>
-
             <Route path="/AboutMe" component={About} />
             <Route path="/MySkills" component={Skills} />
             <Route path="/MyWork" component={Work} />

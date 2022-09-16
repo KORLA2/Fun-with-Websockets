@@ -10,6 +10,7 @@ const Intro = () => {
    initial={{height:0}}
 animate={{height: '55vh'}}
 transition={ {type:'spring',duration:.3  }}
+
    >
 
 <InnerBox>
@@ -34,7 +35,7 @@ transition={{  duration :1,delay:1.2,}}
 >
 
 
-<Hero src={Photo}/>
+<Hero  src={Photo}/>
 
 </motion.div>
 </InnerBox>
@@ -46,31 +47,34 @@ transition={{  duration :1,delay:1.2,}}
 export default Intro
 
 let OuterBox = styled(motion.div)`
-display:flex;
-justify-content:center;
-align-items:center;
-padding:3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3vw;
 
-//background has o be investigated
+  //background has o be investigated
+  background: radial-gradient(
+    circle farthest-side,
+    hsla(112, 35%, 51%, 0.438) , hsla(113, 70%, 77%, 0.438)
+  );
 
-background: red;
-border:2px solid black;
-width:50vw;
-position:absolute;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
-transition: all 2s ease;
+  border: 2px solid black;
+  width: 50vw;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 2s ease;
 `; 
 let InnerBox=styled(motion.div)`
 position:relative;
 text-align:center;
 width:50%;
-padding: 1rem;;
+padding: 1rem;
+
 `
-let Hero = styled.img`
-  /* position: absolute; */
+let Hero = styled(motion.img)`
   height:100%;
   width:100%;
-object-fit: cover;
+object-position: center;
 `;

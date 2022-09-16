@@ -10,7 +10,8 @@ const Skills = () => {
     <div>
       <Powers />
 
-      <Particle/>
+
+    <Particle/>
       <Main>
         <Box
           initial={{ width: 0 }}
@@ -22,11 +23,16 @@ const Skills = () => {
             <Code />
             <h2>Competetive Programmer</h2>
           </Title>
+         
           <p>I enjoy ,Love Coding</p>
+         
           <h2>LanguagesKnown</h2>
+         
           <p>C ,C++,JavaScript</p>
-<h3>Miscelleneous Skills</h3>
-<p>Linux</p>
+         
+         <h3>Miscelleneous Skills</h3>
+         <strong>DataStructures And Algorithms </strong>
+<p>Linux Commands,Operating Systems,MySQL,Git GitHub</p>
         </Box>
 
         <Box
@@ -42,7 +48,7 @@ const Skills = () => {
 
           <h3>I enjoy bringing new ideas into life</h3>
           <h2>Skills</h2>
-          <p> HTML,CSS,JS,React,Redux,FireBase, Github, Tailwind</p>
+          <p> HTML,CSS,JS,React,Redux,FireBase,Github, styled-components</p>
           <h2>Tools</h2>
           <p>Vs Code,GitHub,Git</p>
         </Box>
@@ -53,25 +59,30 @@ const Skills = () => {
 
 export default Skills
 let Main = styled.div`
-height:100vh;
-width:100vw;
-
-display:flex;
-justify-content:space-evenly;
-align-items: center;
-
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(
+    circle farthest-side,
+    hsla(111, 22%, 50%, 0.438),
+    hsla(165, 53%, 73%, 0.438)
+  );
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: all 2s ease;
 `;
 
 
 let Box = styled(motion.div)`
   padding: 2vw;
-  position:relative;
+  position: relative;
   border: 2px solid black;
+  text-align: center;
   transition: all 2s ease;
-text-align:center;
   &:hover {
     background: black;
     color: white;
+    border: 2px solid white;
   }
 `;let Title=styled.div`
 
