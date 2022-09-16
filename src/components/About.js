@@ -25,7 +25,7 @@ const About = () => {
 <strong> I always  wanted to try new challening projects daily that interest brought me to   Open Source Contributions </strong>
 <p>Till now I only contributed to few  projects as I started lately but this continues</p>
 
-<strong>I love to teach the content I know</strong>
+<strong>I love to teach the content I know </strong>
 
 </Box>
 
